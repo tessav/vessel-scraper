@@ -7,5 +7,5 @@
 ### To crawl
 `python manage.py crawl`
 
-### To run server
+### To browse data
 `python manage.py runserver`
