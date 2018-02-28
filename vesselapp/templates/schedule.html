@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <br />
+    <h3>Vessel Schedule</h3>
+    <br />
+    <form action="/" method='GET'>
+      <select class="form-control" name="dt" onchange='this.form.submit()'>
+        <option {% if request.args.get('dt') == 'Today' %} selected {% endif %}>Today</option>
+        <option {% if request.args.get('dt') == 'Tomorrow' %} selected {% endif %}>Tomorrow</option>
+        <option {% if request.args.get('dt') == 'Past 5 days' %} selected {% endif %}>Past 5 days</option>
+      </select>
+      <noscript><input type="submit" value="Submit"></noscript>
+    </form>
+    <br />
+    <table id="schedule" class="display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Date</th>
+      <th scope="col">ETA/ATA</th>
+      <th scope="col">Vessel</th>
+      <th scope="col">Cargo</th>
+      <th scope="col">Qty (MT/TEU)</th>
+      <th scope="col">I/E</th>
+      <th scope="col">Agent</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in schedule %}
+    <tr>
+      <th scope="row">{{loop.index}}</th>
+      <td>{{ row.arv_dt.date() }}</td>
+      <td>{{ row.arv_dt.time() }}</td>
+      <td><a href="/vessel?vs={{ row.v_id }}">{{ row.v_name }}</a></td>
+      <td>{{ row.cargo }}</td>
+      <td>{{ row.qty }}</td>
+      <td>{{ row.v_type }}</td>
+      <td>{{ row.agent }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  </div>
+</div>
+
+{% endblock %}

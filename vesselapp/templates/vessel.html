@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <br />
+    <h3>Vessel Logs</h3>
+    <br />
+    <form action="/vessel" method='GET'>
+      <select class="form-control" name="vs" onchange='this.form.submit()'>
+        {% for vessel in vessels %}
+        <option value="{{ vessel.v_id }}" {% if request.args.get('vs') == vessel.v_id|string() %} selected {% endif %}>{{ vessel.v_name }}</option>
+        {% endfor %}
+      </select>
+      <noscript><input type="submit" value="Submit"></noscript>
+    </form>
+
+    <br />
+    <h4>Schedule</h4>
+    <table id="schedule" class="display" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Date</th>
+          <th scope="col">ETA/ATA</th>
+          <th scope="col">Vessel</th>
+          <th scope="col">Cargo</th>
+          <th scope="col">Qty (MT/TEU)</th>
+          <th scope="col">I/E</th>
+          <th scope="col">Agent</th>
+          <th scope="col">Retrieved On</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in schedule %}
+        <tr>
+          <th scope="row">{{ row.vs_id }}</th>
+          <td>{{ row.arv_dt.date() }}</td>
+          <td>{{ row.arv_dt.time() }}</td>
+          <td>{{ row.vessel.v_name }}</td>
+          <td>{{ row.cargo }}</td>
+          <td>{{ row.qty }}</td>
+          <td>{{ row.v_type }}</td>
+          <td>{{ row.agent }}</td>
+          <td>{{ row.scraped_on }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <br />
+    <h4>Position</h4>
+    <h4>Movement</h4>
+  </div>
+</div>
+
+{% endblock %}
