@@ -71,7 +71,7 @@
           <th scope="row">{{ row.vp_id }}</th>
           <td>{{ row.berth }}</td>
           <td>{{ row.fc }}</td>
-          <td>{{ row.berth_date.date() }}</td>
+          <td>{% if row.berth_date %}{{ row.berth_date.date() }} {% endif %}</td>
           <td>{{ row.qty }}</td>
           <td>{{ row.day_handling }}</td>
           <td>{{ row.up_to_day_handling }}</td>
