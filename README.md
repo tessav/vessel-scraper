@@ -1,7 +1,7 @@
 # Vessel Scraper
 
-## Setup
-`./setup.sh`
+### Setup
+`./setup.sh` <br>
 `python manage.py migrate`
 
 ### To crawl
