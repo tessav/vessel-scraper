@@ -1,4 +1,10 @@
 # Vessel Scraper
+## About
+Vessel Scraper crawls vessel schedule, movement and position from Cochin Port's website.<br> 
+<br>
+Database: PostgreSQL<br>
+ORM: SQLAlchemy<br>
+Web: Flask<br>
 
 ### Setup
 `./setup.sh` <br>
@@ -9,3 +15,4 @@
 
 ### To browse data
 `python manage.py runserver`
+
