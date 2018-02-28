@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import os
 from flask_script import Manager
 from vesselapp import app
 from vesselapp.models import db

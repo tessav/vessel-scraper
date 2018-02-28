@@ -27,9 +27,16 @@ class VesselSchedule(db.Model):
     v_type = db.Column(db.String(8))
     agent = db.Column(db.String(64))
     scraped_on = db.Column(db.DateTime(timezone=True), server_default=func.now())
-# 
-# class VesselMovement(db.Model):
-#     pass
+
+
+class VesselMovement(db.Model):
+    vm_id = db.Column(db.Integer, primary_key=True)
+    move_date = db.Column(db.DateTime)
+    vessel_ref = db.Column(db.Integer, db.ForeignKey('vessel.v_id'), nullable=False)
+    status = db.Column(db.String(32))
+    berth_allotted = db.Column(db.String(32))
+    boarding_time = db.Column(db.Time)
+    scraped_on = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
 
 class VesselPosition(db.Model):

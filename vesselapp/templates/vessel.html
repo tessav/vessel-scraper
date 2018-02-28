@@ -43,14 +43,71 @@
           <td>{{ row.qty }}</td>
           <td>{{ row.v_type }}</td>
           <td>{{ row.agent }}</td>
-          <td>{{ row.scraped_on }}</td>
+          <td>{{ row.scraped_on.date() }}</td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
     <br />
     <h4>Position</h4>
+    <table id="position" class="display" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Berth</th>
+          <th scope="col">F/C</th>
+          <th scope="col">Berth Date</th>
+          <th scope="col">Qty (MT/TEU)</th>
+          <th scope="col">Day Handling</th>
+          <th scope="col">Up To Day Handling</th>
+          <th scope="col">Balance</th>
+          <th scope="col">Load / Discharge Port</th>
+          <th scope="col">Retrieved On</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in position %}
+        <tr>
+          <th scope="row">{{ row.vp_id }}</th>
+          <td>{{ row.berth }}</td>
+          <td>{{ row.fc }}</td>
+          <td>{{ row.berth_date.date() }}</td>
+          <td>{{ row.qty }}</td>
+          <td>{{ row.day_handling }}</td>
+          <td>{{ row.up_to_day_handling }}</td>
+          <td>{{ row.balance }}</td>
+          <td>{{ row.load_port }}</td>
+          <td>{{ row.scraped_on.date() }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <br />
     <h4>Movement</h4>
+    <table id="movement" class="display" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Move Date</th>
+          <th scope="col">Status</th>
+          <th scope="col">Berth Allotted</th>
+          <th scope="col">Boarding Time</th>
+          <th scope="col">Retrieved On</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in movement %}
+        <tr>
+          <th scope="row">{{ row.vm_id }}</th>
+          <td>{{ row.move_date.date() }}</td>
+          <td>{{ row.status }}</td>
+          <td>{{ row.berth_allotted }}</td>
+          <td>{{ row.boarding_time }}</td>
+          <td>{{ row.scraped_on.date() }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
 

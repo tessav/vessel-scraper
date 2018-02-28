@@ -33,9 +33,20 @@ class ScraperSpiderMiddleware(object):
         # it has processed the response.
 
         # Must return an iterable of Request, dict or Item objects.
-        for i in result:
-            if i['arv_dt'] - dt.now() <= timedelta(days=2):
-                yield i
+        if spider.name == 'schedule':
+            for i in result:
+                # filter out all vessels that arrive in more than 2 days
+                if i['arv_dt'] - dt.now() <= timedelta(days=2):
+                    yield i
+        elif spider.name == 'position':
+            for i in result:
+                # filter out items that are invalid i.e. NO VESSEL or NIL
+                if i['vessel'] != 'NO VESSEL':
+                    yield i
+        elif spider.name == 'movement':
+            for i in result:
+                if i['vessel'] != 'NIL':
+                    yield i
 
     def process_spider_exception(self, response, exception, spider):
         # Called when a spider or process_spider_input() method

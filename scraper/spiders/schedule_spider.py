@@ -1,12 +1,12 @@
 import scrapy
-from scraper.items import VesselItem
+from scraper.items import ScheduleItem
 from datetime import datetime as dt
 
 SCHEDULE_TABLE_ORDER = 2
 STARTING_ROW_ID = 2
 
-class VesselsSpider(scrapy.Spider):
-    name = "vessels"
+class ScheduleSpider(scrapy.Spider):
+    name = "schedule"
 
     def start_requests(self):
         urls = [
@@ -19,7 +19,7 @@ class VesselsSpider(scrapy.Spider):
         schedule_list = response.css('table.shipsinport')[SCHEDULE_TABLE_ORDER].css('tr')[STARTING_ROW_ID:]
         for schedule in schedule_list:
             row = schedule.css('td')
-            vs = VesselItem()
+            vs = ScheduleItem()
             s_date = row[0].css('::text').extract_first()
             s_time = row[1].css('::text').extract_first()
             vs['arv_dt'] = dt.strptime('{} {}'.format(s_date, s_time), '%d.%m.%Y %H:%M')
